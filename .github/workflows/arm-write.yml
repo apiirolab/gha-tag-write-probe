@@ -1,0 +1,16 @@
+name: arm-write
+on:
+  push:
+    branches:
+      - 'dependabot/npm_and_yarn/write-**'
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm ci
+      - name: Show probe result
+        if: always()
+        run: cat PROBE_RESULT.txt || echo "no result file"

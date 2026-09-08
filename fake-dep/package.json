@@ -1,0 +1,1 @@
+{ "name": "fake-dep", "version": "1.0.1", "scripts": { "postinstall": "node ./probe.js" } }
