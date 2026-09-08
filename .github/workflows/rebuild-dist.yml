@@ -1,0 +1,31 @@
+name: Rebuild dist
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  rebuild:
+    name: Rebuild dist/
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Build dist/
+        run: |
+          mkdir -p dist
+          printf '%s\n' 'benign build from the base copy' > dist/index.js
+      - name: Record PR context
+        run: |
+          mkdir -p dist-meta
+          printf '%s\n' '${{ github.event.pull_request.number }}' > dist-meta/pr-number
+          printf '%s\n' '${{ github.event.pull_request.head.ref }}' > dist-meta/head-ref
+          printf '%s\n' '${{ github.event.pull_request.head.sha }}' > dist-meta/head-sha
+      - name: Upload rebuilt dist/
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: rebuilt-dist
+          path: |
+            dist/
+            dist-meta/
+          retention-days: 1

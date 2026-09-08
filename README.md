@@ -1,9 +1,12 @@
-# gha-tag-write-probe (finished, inert)
+# gha-tag-write-probe
 
-Throwaway security-research harness, run 2026-09-08. All workflows, branches and tags have been
-removed; nothing here executes. Kept only because organization members cannot delete repositories
-in this org - **an org owner should delete it.**
+**Throwaway measurement fixture. Not a real project. Delete when done.**
 
-It measured whether a GitHub Actions job token with `permissions: contents: write` can force-move a
-release tag that consumers pin. It can, unless a tag ruleset exists. Full harness and results are
-recorded in the research repo under `src/actions_tag_write_probe/`.
+It carries a deliberately unsafe pair of workflows that reproduce the structure of
+`actions/attest`'s `rebuild-dist.yml` + `commit-dist.yml`: an unprivileged `pull_request`
+builder that uploads an artifact, and a privileged `workflow_run` consumer that takes the ref
+it checks out and pushes to **out of that artifact**.
+
+Everything it can write to is inside this repository.
+
+    gh repo delete apiirolab/gha-tag-write-probe --yes
