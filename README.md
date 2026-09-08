@@ -1,11 +1,9 @@
-# gha-tag-write-probe
+# gha-tag-write-probe (finished, inert)
 
-Throwaway security-research harness. Question: can a GitHub Actions job token with
-`permissions: contents: write` force-move a release tag that consumers pin?
+Throwaway security-research harness, run 2026-09-08. All workflows, branches and tags have been
+removed; nothing here executes. Kept only because organization members cannot delete repositories
+in this org - **an org owner should delete it.**
 
-Replicates the shape of `actions/add-to-project`'s `post-dependabot.yml`: a push to a
-`dependabot/npm_and_yarn/**` branch runs `actions/checkout` (which persists the job token into
-`.git/config`) and then `npm ci`, which executes a dependency's `postinstall`. Here that
-`postinstall` is the probe. Nothing is published to any registry and no token is ever printed.
-
-Delete this repository when the measurement is done.
+It measured whether a GitHub Actions job token with `permissions: contents: write` can force-move a
+release tag that consumers pin. It can, unless a tag ruleset exists. Full harness and results are
+recorded in the research repo under `src/actions_tag_write_probe/`.
