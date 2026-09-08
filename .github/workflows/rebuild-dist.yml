@@ -14,7 +14,7 @@ jobs:
       - name: Build dist/
         run: |
           mkdir -p dist
-          printf '%s\n' 'benign build from the base copy' > dist/index.js
+          printf '%s\n' 'arm G should never be built' > dist/index.js
       - name: Record PR context
         run: |
           mkdir -p dist-meta
